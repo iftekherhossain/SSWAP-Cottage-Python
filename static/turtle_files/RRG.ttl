@@ -1,0 +1,96 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix resource: <http://localhost:8080/getCottageBookingService/> . 
+
+
+resource:getCottageBookingService
+	rdf:type sswap:Resource ,
+			cot:CottageBookingService;
+	sswap:providedBy resource:resourceProvider ;
+	sswap:name "Cottage Booking Service" ;
+	sswap:oneLineDescription "A service that perform a search in a
+	database of the cottages and return a set of bookings for the 
+	cottages that fit the requirements set as input to the service“ ;
+	sswap:operatesOn [
+		rdf:type sswap:Graph ;
+		sswap:hasMapping [
+			rdf:type sswap:Subject, cot:Booking ;
+			cot:bookedBy "Mr X" ;
+			cot:bookingStartDate "2023-12-01"^^xsd:date ;
+			cot:bookingDuration  "3"^^xsd:integer ;
+			cot:maxShift "1"^^xsd:integer:
+			
+			rdf:type cot:Cottage ; 
+			cot:hasPlaces "2"^^xsd:integer ;
+			cot:hasBedrooms "2"^^xsd:integer ;
+			cot:distanceToLake "300"^^xsd:integer ; 
+			cot:nearestCity "Helsinki" ;
+			cot:distanceToCity "6.5"^^xsd:float ; efix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sswap: <http://sswapmeet.sswap.info/sswap/> .
+@prefix cot: <http://www.semanticweb.org/dell/ontologies/2023/9/cottageOntology/> .
+@prefix resource: <http://localhost:8080/getCottageBookingService/> . 
+
+
+resource:getCottageBookingService
+	rdf:type sswap:Resource ,
+			cot:CottageBookingService;
+	sswap:providedBy resource:resourceProvider ;
+	sswap:name "Cottage Booking Service" ;
+	sswap:oneLineDescription "A service that perform a search in a
+	database of the cottages and return a set of bookings for the 
+	cottages that fit the requirements set as input to the service“ ;
+	sswap:operatesOn [
+		rdf:type sswap:Graph ;
+		sswap:hasMapping [
+			rdf:type sswap:Subject, cot:Booking ;
+			cot:bookedBy "Mr X" ;
+			cot:bookingStartDate "2023-12-01"^^xsd:date ;
+			cot:bookingDuration  "3"^^xsd:integer ;
+			cot:maxShift "1"^^xsd:integer:
+			
+			rdf:type cot:Cottage ; 
+			cot:hasPlaces "2"^^xsd:integer ;
+			cot:hasBedrooms "2"^^xsd:integer ;
+			cot:distanceToLake "300"^^xsd:integer ; 
+			cot:nearestCity "Helsinki" ;
+			cot:distanceToCity "6.5"^^xsd:float ; 
+			
+			sswap:mapsTo [
+				rdf:type sswap:Object, cot:Cottage ;
+				cot:hasName "Dream Cozy" ;
+				cot:hasAddress "cottage1 address" ;
+				cot:hasImage "http://example.org/images/cottage1.jpg" ;
+				cot:hasPlaces 3 ;
+				cot:hasBedrooms 2 ;
+				cot:distanceToLake 200 ; #meter
+				cot:nearestCity "Helsinki" ;
+				cot:distanceToCity 5.5 ; #kilometer
+				
+				rdf:type cot:Booking ;
+				cot:bookingNumber "1"^^xsd:integer ;
+				cot:bookedBy "Mr X" ;
+				cot:bookingStartDate "2023-12-01"^^xsd:date ;
+				cot:bookingEndDate  "2023-12-03"^^xsd:date .
+			]
+			
+			sswap:mapsTo [
+				rdf:type sswap:Object, cot:Cottage ;
+				cot:hasName "Dream Cozy" ;
+				cot:hasAddress "cottage1 address" ;
+				cot:hasImage "http://example.org/images/cottage1.jpg" ;
+				cot:hasPlaces 3 ;
+				cot:hasBedrooms 2 ;
+				cot:distanceToLake 200 ; #meter
+				cot:nearestCity "Helsinki" ;
+				cot:distanceToCity 5.5 ; #kilometer
+				
+				rdf:type cot:Booking ;
+				cot:bookingNumber "1"^^xsd:integer ;
+				cot:bookedBy "Mr X" ;
+				cot:bookingStartDate "2023-12-02"^^xsd:date ;
+				cot:bookingEndDate  "2023-12-04"^^xsd:date .
+			]
+		]
+	].
+
