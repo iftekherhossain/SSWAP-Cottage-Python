@@ -3,16 +3,17 @@ import re
 from datetime import datetime, timedelta
 from rdflib import Graph
 import rdflib
+import jellyfish
 
-def make_rig(rdg, mapping_values):
+def make_rig(rdg, mapping_values,properties):
     rdg_copy = copy.deepcopy(rdg)
     mapping_section = rdg.split('sswap:hasMapping [')[1].split(']')[0].split("sswap:mapsTo")[0]
     mapping_section_prev = copy.copy(mapping_section)
     
     for key, value in mapping_values.items():
         print(key,value)
-        cor = key.split(":")[-1]
-        mapping_section = re.sub(rf'(\w+):{cor} ""', rf'\1:{cor} "{value}"', mapping_section)
+        prop = ret_similar(key, properties)
+        mapping_section = re.sub(rf'(\w+):{key} ""', rf'\1:{key} "{value}"', mapping_section)
         # mapping_section =re.sub(rf'(\w+:{cor}) ""', r'\1 "' + str(value) + '"', mapping_section)
 
     rig = rdg_copy.replace(mapping_section_prev,mapping_section)
@@ -86,3 +87,13 @@ def get_rdg_properties(turtle_file):
             properties.append(pred_str.split('/')[-1])
         
     return properties
+
+def ret_similar(match,li):
+    maxi = 0
+    for i,l in enumerate(li):
+        temp_sim = jellyfish.jaro_similarity(match,l)
+        if temp_sim>maxi:
+            maxi = temp_sim
+            out_idx = i
+        
+    return li[out_idx]

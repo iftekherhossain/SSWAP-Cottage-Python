@@ -34,15 +34,15 @@ async def query(request: Request,
                 maxshift: int = Form(...)):
     print(url,name, places, bedrooms, lakedist,city, citydist, bookingday,ndays,maxshift)
     mapping_values = {
-    "cot:bookedBy": name,
-    "cot:bookingStartDate": bookingday,
-    "cot:bookingDuration": ndays,  # Duration in days
-    "cot:maxShift": maxshift,  # Max shift in days
-    "cot:hasPlaces": places,  # Number of places
-    "cot:hasBedrooms": bedrooms,  # Number of bedrooms
-    "cot:distanceToLake": lakedist,  # Distance in meters
-    "cot:nearestCity": city,
-    "cot:distanceToCity": citydist,  # Distance in kilometers
+    "bookedBy": name,
+    "bookingStartDate": bookingday,
+    "bookingDuration": ndays,  # Duration in days
+    "maxShift": maxshift,  # Max shift in days
+    "hasPlaces": places,  # Number of places
+    "hasBedrooms": bedrooms,  # Number of bedrooms
+    "distanceToLake": lakedist,  # Distance in meters
+    "nearestCity": city,
+    "distanceToCity": citydist,  # Distance in kilometers
     }   
     response = requests.get(url)
     # rdg_file =
