@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request, Form
+from fastapi.responses import FileResponse
 import json
 import uvicorn
 from rdflib import Graph
@@ -24,11 +25,7 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 async def view_page(request: Request):
     file_path = "static/turtle_files/RDG.ttl"
-    with open(file_path, 'r') as file:
-        rdg = file.read().replace("\n", "").replace("\t", "").replace("\\\\","")
-    # rdg = file_contents.read()
-    print(rdg)
-    return rdg
+    return FileResponse(path=file_path, media_type='application/octet-stream', filename="RDG.ttl")
 
 @app.post("/parse_rig")
 async def rig_parse(request: Request):
@@ -106,7 +103,7 @@ async def rig_parse(request: Request):
         BASE_RRG+=temp_rrg
         # BASE_RRG+="\n"
         
-    print(BASE_RRG.replace("\n", "").replace("\t", ""))
+    print("hello_rrg",BASE_RRG.replace("\n", "").replace("\t", ""),"RRG END")
     return str(BASE_RRG)
 
 

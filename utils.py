@@ -2,6 +2,7 @@ import copy
 import re
 from datetime import datetime, timedelta
 from rdflib import Graph
+import rdflib
 
 def make_rig(rdg, mapping_values):
     rdg_copy = copy.deepcopy(rdg)
@@ -10,10 +11,12 @@ def make_rig(rdg, mapping_values):
     
     for key, value in mapping_values.items():
         print(key,value)
-        mapping_section = re.sub(f'{key} ""', f'{key} "{value}"', mapping_section)
+        cor = key.split(":")[-1]
+        mapping_section = re.sub(rf'(\w+):{cor} ""', rf'\1:{cor} "{value}"', mapping_section)
+        # mapping_section =re.sub(rf'(\w+:{cor}) ""', r'\1 "' + str(value) + '"', mapping_section)
 
     rig = rdg_copy.replace(mapping_section_prev,mapping_section)
-    
+    print("hello_my_new_rig",rig)
     return rig
 
 def rdf_query(name,places,bedrooms,lakedist,city,citydist,bookingday,ndays,maxshift):
@@ -56,3 +59,30 @@ def rdf_query(name,places,bedrooms,lakedist,city,citydist,bookingday,ndays,maxsh
     print(que)
     results = g.query(que)
     return results,bookingendday
+
+def get_rdg_properties(turtle_file):
+    g = rdflib.Graph()
+
+    # turtle_file = 'static/turtle_files/RDG.ttl'
+    g.parse(turtle_file, format='turtle')
+
+    # Find hasMapping
+    for subject, predicate, object in g:
+        # Convert subject, predicate, object to strings for easier handling
+        subj_str = str(subject)
+        pred_str = str(predicate)
+        obj_str = str(object)
+        if pred_str.split("/")[-1]=="hasMapping":
+            hasMapping_Sub = obj_str
+        # print("hello",subj_str,"--",pred_str,"--",obj_str)
+    properties = []
+    for subject, predicate, object in g:
+        # Convert subject, predicate, object to strings for easier handling
+        subj_str = str(subject)
+        pred_str = str(predicate)
+        obj_str = str(object)
+        if subj_str == hasMapping_Sub and obj_str=='':
+            print("helo",subj_str,"---",pred_str,"--",obj_str)
+            properties.append(pred_str.split('/')[-1])
+        
+    return properties

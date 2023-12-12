@@ -1,0 +1,68 @@
+@prefix cot: <http://users.jyu.fi/~mihossai/cottages.owl> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+cot:Cottage1 
+    rdf:type cot:Cottage ;
+    cot:hasName "Dream Cozy" ;
+    cot:hasAddress "cottage1 address" ;
+    cot:hasImage "images/cottage1.jpg" ;
+    cot:hasPlaces 3 ;
+    cot:hasBedrooms 2 ;
+    cot:distanceToLake 200 ; #meter
+    cot:nearestCity "Helsinki" ;
+    cot:distanceToCity 5.5 ; #kilometer
+    cot:bookingStartDate "2023-11-05" ;
+    cot:bookingEndDate "2023-11-07" .
+
+cot:Cottage2
+    rdf:type cot:Cottage ;
+    cot:hasName "Dream Luxury" ;
+    cot:hasAddress "cottage2 address" ;
+    cot:hasImage "images/cottage2.jpg" ;
+    cot:hasPlaces 5 ;
+    cot:hasBedrooms 3 ;
+    cot:distanceToLake 250 ; #meter
+    cot:nearestCity "Turku" ;
+    cot:distanceToCity 4 ;
+    cot:bookingStartDate "2023-11-05" ;
+    cot:bookingEndDate "2023-11-07" . 
+
+cot:Cottage3 
+    rdf:type cot:Cottage ;
+    cot:hasName "Vintage vive" ;
+    cot:hasAddress "cottage3 address" ;
+    cot:hasImage "images/cottage3.jpg" ;
+    cot:hasPlaces 4 ;
+    cot:hasBedrooms 3 ;
+    cot:distanceToLake 150 ;#meter
+    cot:nearestCity "Jyväskylä" ;
+    cot:distanceToCity 5.2 ; #kilometer
+    cot:bookingStartDate "2023-11-05" ;
+    cot:bookingEndDate "2023-11-07" .
+    
+
+cot:Cottage4 
+    rdf:type cot:Cottage ;
+    cot:hasName "Summer village" ;
+    cot:hasAddress "cottage4 address" ;
+    cot:hasImage "images/cottage4.jpg" ;
+    cot:hasPlaces 5 ;
+    cot:hasBedrooms 2 ;
+    cot:distanceToLake 300 ;#meter
+    cot:nearestCity "Helsinki" ;
+    cot:distanceToCity 5.2 ; #kilometer
+    cot:bookingStartDate "2023-11-05" ;
+    cot:bookingEndDate "2023-11-07" .
+
+cot:Cottage5 
+    rdf:type cot:Cottage ;
+    cot:hasName "Lake View" ;
+    cot:hasAddress "cottage5 address" ;
+    cot:hasImage "images/cottage5.jpg" ;
+    cot:hasPlaces 3 ;
+    cot:hasBedrooms 3 ;
+    cot:distanceToLake 100 ;#meter
+    cot:nearestCity "Jyväskylä" ;
+    cot:distanceToCity 6.5 ; #kilometer
+    cot:bookingStartDate "2023-11-05" ;
+    cot:bookingEndDate "2023-11-07" .

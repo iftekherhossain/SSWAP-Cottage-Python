@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from datetime import datetime, timedelta
 import random
 import requests
-from utils import make_rig
+from utils import make_rig, get_rdg_properties
 import re
 
 HOST = "127.0.0.2"
@@ -32,53 +32,21 @@ async def query(request: Request,
                 bookingday: str = Form(...),
                 ndays: int = Form(...),
                 maxshift: int = Form(...)):
-    print(ndays)
-    mapping_values = {
-    "cot:bookedBy": name,
-    "cot:bookingStartDate": bookingday,
-    "cot:bookingDuration": 1,  # Duration in days
-    "cot:maxShift": maxshift,  # Max shift in days
-    "cot:hasPlaces": places,  # Number of places
-    "cot:hasBedrooms": bedrooms,  # Number of bedrooms
-    "cot:distanceToLake": lakedist,  # Distance in meters
-    "cot:nearestCity": city,
-    "cot:distanceToCity": citydist,  # Distance in kilometers
-    }   
+    
     response = requests.get(url)
-    rdg = response.text
-    rdg = rdg.replace("\\", "")
-    # print("hello_rdg",rdg)
-    rig = make_rig(rdg,mapping_values)
-    # print("hello_rig",rig)
-    rig_send_url = "http://127.0.0.3:8000/parse_rig"
-    rig_send_response = requests.post(url=rig_send_url, data=rig)
-    rrg_text = rig_send_response.text.replace("\\n", "").replace("\\t", "").replace("\\\\","")
-    parsed_cottages = re.findall(r'sswap:mapsTo \[(.*?)\]', rrg_text)
+    # rdg_file =
+    with open('temp_rdg.ttl', 'wb') as file:  # Replace 'filename.ext' with the desired file name
+        file.write(response.content)
+    properties = get_rdg_properties("temp_rdg.ttl")
+    print("Hello Properties",properties)
+    dic = {}
     
-    cottages = []
-    cottage_images = []
-    cottage_addresses = []
-    booking_ids = []
-    for parsed_cottage in parsed_cottages:
-        cottage = re.findall(r'cot:hasName (.*?) ;', parsed_cottage)[0]
-        address = re.findall(r'cot:hasAddress (.*?) ;', parsed_cottage)[0]
-        image = re.findall(r'cot:hasImage (.*?) ;', parsed_cottage)[0]
-        book_id = re.findall(r'cot:bookingNumber (.*?) ;', parsed_cottage)[0]
-        cottages.append(cottage)
-        cottage_images.append(image)
-        cottage_addresses.append(address)
-        booking_ids.append(book_id)
-    
-    all_cottage_info = zip(cottages,cottage_images,cottage_addresses,booking_ids) 
-    # name = re.findall(r'cot:bookedBy\s*"([^"]+)"', rig)
-    return templates.TemplateResponse("index_sswap.html", {"request": request,
-                                                     "booker_name":name,
-                                                     "all_cottage_info":all_cottage_info})
+    return templates.TemplateResponse("index_sswap2.html", {"request": request})
 
 
 @app.get("/")
 async def view_page(request: Request):
-    return templates.TemplateResponse("index_sswap.html", {"request": request})
+    return templates.TemplateResponse("index_sswap2.html", {"request": request})
 
 if __name__ == '__main__':
     uvicorn.run("mediator:app",reload=True, port=PORT, host=HOST)

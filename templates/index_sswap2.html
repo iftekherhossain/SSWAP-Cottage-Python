@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cottage Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+         p {
+            text-align: center;
+        }
+         .center {
+		  display: block;
+		  margin-left: auto;
+		  margin-right: auto;
+		}
+    </style>
+</head>
+
+<body>
+	<h1>Cottage Booking Service</h1>
+    <form action="/" method="post">
+        <label>Service URL:</label>
+        <input type="text" name="url">
+        
+        <label>Name:</label>
+        <input type="text" name="bookedBy">
+
+        <label>Number of Places:</label>
+        <input type="text" name="hasPlaces">
+
+        <label>Number of Bedrooms:</label>
+        <input type="text" name="hasBedrooms">
+
+        <label>Distance from lake:</label>
+        <input type="text" name="distanceToLake">
+
+        <label>City:</label>
+        <select id="fruits" name="nearestCity">
+		    <option value="Helsinki">Helsinki</option>
+		    <option value="Turku">Turku</option>
+		    <option value="Jyväskylä">Jyväskylä</option>
+		</select>
+
+        <label>Distance from city:</label>
+        <input type="text" name="distanceToCity">
+
+        <label>Booking start day:</label>
+        <input type="date" name="bookingStartDate">
+
+        <label>Number of Days:</label>
+        <input type="text" name="bookingDuration">
+        
+        <label>Max possible shift days:</label>
+        <input type="text" name="maxShift">
+
+        <input type="submit" value="Send">
+    </form>
+</body>
+<h1>Booker Name:{{booker_name}}</h1>
+    {% for name,img,adrs,book_id in all_cottage_info %}
+        <h3>{{name}}</h1>
+        <h3>{{adrs}}</h3>
+        <h3>Booker ID:{{book_id}}</h3>
+        <img class='center' src="static/{{img}}" width="600" height="400" title="Mountain Landscape" loading="lazy">
+    {% endfor %}
+    </ul>
+
