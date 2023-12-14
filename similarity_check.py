@@ -10,5 +10,5 @@ def ret_similar(match,li):
         
     return li[out_idx]
     
-out = ret_similar("bookerName",li)
+out = ret_similar("numDays",li)
 print(out)

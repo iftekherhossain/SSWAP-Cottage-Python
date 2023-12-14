@@ -13,7 +13,7 @@ def make_rig(rdg, mapping_values,properties):
     for key, value in mapping_values.items():
         print(key,value)
         prop = ret_similar(key, properties)
-        mapping_section = re.sub(rf'(\w+):{key} ""', rf'\1:{key} "{value}"', mapping_section)
+        mapping_section = re.sub(rf'(\w+):{prop} ""', rf'\1:{prop} "{value}"', mapping_section)
         # mapping_section =re.sub(rf'(\w+:{cor}) ""', r'\1 "' + str(value) + '"', mapping_section)
 
     rig = rdg_copy.replace(mapping_section_prev,mapping_section)

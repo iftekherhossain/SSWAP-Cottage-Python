@@ -121,12 +121,20 @@
         <input type="submit" value="Send">
     </form>
 </body>
-<h1>Booker Name:{{booker_name}}</h1>
-    {% for name,img,adrs,book_id in all_cottage_info %}
-        <h3>{{name}}</h1>
-        <h3>{{adrs}}</h3>
+
+    {% for img,adrs,book_id, place, bedroom, dlake, city, dcity, bookername, stdate, endate in all_cottage_info %}
+        <h3>Address:{{adrs}}</h3>
         <h3>Booker ID:{{book_id}}</h3>
+        <h3>Place:{{place}}</h3>
+        <h3>Bedrooms:{{bedroom}}</h3>
+        <h3>Distance from Lake:{{dlake}}</h3>
+        <h3>City:{{city}}</h3>
+        <h3>Distance from City:{{dcity}}</h3>
+        <h3>Booker Name:{{bookername}}</h3>
+        <h3>Start Date:{{stdate}}</h3>
+        <h3>End Date:{{endate}}</h3>
         <img class='center' src="static/{{img}}" width="600" height="400" title="Mountain Landscape" loading="lazy">
     {% endfor %}
     </ul>
 
+    cottage_images, cottage_addresses, booking_ids, places, bedrooms, distlakes, cities, distcities, bookernames, stdates, endates

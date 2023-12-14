@@ -85,7 +85,6 @@ async def rig_parse(request: Request):
         temp_rrg = f"""
         sswap:mapsTo [
 				rdf:type sswap:Object, cot:Cottage ;
-				cot:hasName {str(row.cottageName)} ;
 				cot:hasAddress {str(row.cottageAddress)} ;
 				cot:hasImage {str(row.cottageImage)} ;
 				cot:hasPlaces {places} ;
@@ -97,7 +96,7 @@ async def rig_parse(request: Request):
 				cot:bookingNumber {random.randint(0,1000)} ;
 				cot:bookedBy {name} ;
 				cot:bookingStartDate {bookingday} ;
-				cot:bookingEndDate  {bookingendday} .
+				cot:bookingEndDate {bookingendday} .
             ]
         """
         BASE_RRG+=temp_rrg
